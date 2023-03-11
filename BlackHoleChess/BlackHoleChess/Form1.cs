@@ -6,13 +6,12 @@ namespace BlackHoleChess
         public Form1()
         {
             InitializeComponent();
-            
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            table = new Table(9, 13);
+            table = new Table();
             table.createTable2();
         }
     }

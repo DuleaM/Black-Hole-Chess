@@ -9,21 +9,26 @@ namespace BlackHoleChess
 {
     internal class Table
     {
-
+        Form currentForm = Form.ActiveForm;
         private int width;
         private int height;
-        private Piece[,] pieces;
+        private Piece[,] pieces = new Piece[20, 20];
 
-        public Table(int width, int height) {
-            this.width = width;
-            this.height = height;
-            this.pieces = new Piece[width, height];
+        public Table() {
+            this.width = currentForm.Width;
+            this.height = currentForm.Height;
+
         }
-
 
         public void createTable2()
         {
-            Pawn pawn = new Pawn(20, 20, "Black");
+            pieces[0, 0] = new Pawn(0, 100, "Black");
+            pieces[0, 1] = new Pawn(100, 100, "Black");
+            pieces[0, 2] = new Pawn(200, 100, "Black");
+            pieces[0, 3] = new Pawn(300, 100, "Black");
+            pieces[0, 4] = new Pawn(400, 100, "Black");
+            pieces[0, 5] = new Pawn(500, 100, "Black");
+
         }
 
         public void createTable()
@@ -31,7 +36,7 @@ namespace BlackHoleChess
             for (int column = 0; column < width; ++column)
 
             {
-                for(int line = 0; line < height; ++height)
+                for(int line = 0; line < height; ++line)
                 {
                     //create pieces
                 }
