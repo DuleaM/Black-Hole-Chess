@@ -14,8 +14,6 @@ namespace BlackHoleChess
         {
             table = new Table(9, 13);
             table.createTable2();
-           
-            
         }
     }
 }
