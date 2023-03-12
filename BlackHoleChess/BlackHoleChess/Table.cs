@@ -12,33 +12,41 @@ namespace BlackHoleChess
         Form currentForm = Form.ActiveForm;
         private int width;
         private int height;
-        private Piece[,] pieces = new Piece[20, 20];
-
+        private Piece[,] pieces;
+        private int left_space = 200;
+        private int under_space = 100;
+        private int test;
         public Table() {
-            this.width = currentForm.Width;
-            this.height = currentForm.Height;
-
+            this.height = 9;
+            this.width = 13;
+            pieces = new Piece[width, height];
+            left_space = currentForm.Width / width;
         }
 
-        public void createTable2()
-        {
-            pieces[0, 0] = new Pawn(0, 100, "Black");
-            pieces[0, 1] = new Pawn(100, 100, "Black");
-            pieces[0, 2] = new Pawn(200, 100, "Black");
-            pieces[0, 3] = new Pawn(300, 100, "Black");
-            pieces[0, 4] = new Pawn(400, 100, "Black");
-            pieces[0, 5] = new Pawn(500, 100, "Black");
 
-        }
 
         public void createTable()
         {
-            for (int column = 0; column < width; ++column)
+            createBlackTeam();
+            //createWhiteTeam();
+        }
 
+        private void createBlackTeam()
+        {
+           for (int line = 0; line < 13; ++line) {
+                for (int column = 0; column < height; ++column){
+                    pieces[line, column] = new Pawn(left_space * column, under_space * line, "Black");
+                }
+           }
+        }
+
+        private void createWhiteTeam()
+        {
+            for (int line = 7; line < 9; ++line)
             {
-                for(int line = 0; line < height; ++line)
+                for (int column = 0; column < height; ++column)
                 {
-                    //create pieces
+                    //pieces[line, height] = new Pawn(space * column, space * line, "Black");
                 }
             }
 
