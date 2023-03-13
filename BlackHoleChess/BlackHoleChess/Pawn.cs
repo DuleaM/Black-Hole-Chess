@@ -9,16 +9,11 @@ namespace BlackHoleChess
 
     internal class Pawn : Piece
     {
-        bool firstMove;
+        public static bool firstMove;
         public Pawn(int xCoord, int yCoord, string side) : base(xCoord, yCoord, side)
         {
-            if (side == "Black")
-                image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_black.png");
-            else if (side == "White")
-                image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_white.png");
-
             createPiece();
-            firstMove = false;
+            firstMove = true;
         }
 
         private void createPiece()
@@ -27,8 +22,23 @@ namespace BlackHoleChess
             button.Location = new Point(xCoord, yCoord);
             button.Size = piecesSize;
             button.Image = image;
-
+            button.Click += pawn_Click;
             activeForm.Controls.Add(button);
+        }
+
+    
+        public void move()
+        {
+            if(firstMove)
+            {
+                firstMove = false;
+            }
+        }
+
+
+        private void pawn_Click(object? sender, EventArgs e)
+        {
+            displayPossibleMoves();
         }
 
 
