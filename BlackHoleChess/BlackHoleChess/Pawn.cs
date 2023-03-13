@@ -11,7 +11,11 @@ namespace BlackHoleChess
     {
         public Pawn(int xCoord, int yCoord, string side): base(xCoord, yCoord, side)
         {
-            image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn.png");
+            if(side == "Black")
+                image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_black.png");
+            else
+                image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_white.png");
+
             createPiece();
         }
 
@@ -21,9 +25,9 @@ namespace BlackHoleChess
             button = new Button();
             
             button.Location = new Point(xCoord, yCoord);
+            button.Size = new Size(60, 90);
             button.Image = image;
-            button.Height = image.Height;
-            button.Width = image.Width;
+
 
             activeForm.Controls.Add(button);
         }

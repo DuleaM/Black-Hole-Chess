@@ -4,7 +4,9 @@ namespace BlackHoleChess
     {
         Table table;
         EntryPage entryPage;
-        Button startButton = new Button();
+        Button startLocalGame = new Button();
+        Button startLanGame = new Button();
+        Button startAIGame = new Button();
 
         public Form1()
         {
@@ -16,19 +18,20 @@ namespace BlackHoleChess
         {
             table = new Table();
             entryPage = new EntryPage();
-            setStartButtonDetails();
+            setLocalButton();
             entryPage.showEntryPage();
         }
 
 
         //Start Game Button
-        private void startButton_Click(object sender, EventArgs e)
+        private void startLocalGame_Click(object sender, EventArgs e)
         {
             if(entryPage.getDropBoxChoice() != String.Empty)
             {
                 entryPage.hideEntryPage();
-                this.Controls.Remove(startButton);
-                table.createTable();
+                this.Controls.Remove(startLocalGame);
+
+                table.createTable(entryPage.getDropBoxChoice());
             }
             else
             {
@@ -38,12 +41,13 @@ namespace BlackHoleChess
         }
 
         //Set The start button details
-        private void setStartButtonDetails()
+        private void setLocalButton()
         {
-            startButton.Text = "Start The Game";
-            startButton.Location = new Point(this.Width / 2, 300);
-            startButton.Click += startButton_Click;
-            this.Controls.Add(startButton);
+            startLocalGame.Text = "Start Local Game";
+            startLocalGame.Location = new Point(this.Width / 2 - 100, 300);
+            startLocalGame.Size = new Size(120, 100);
+            startLocalGame.Click += startLocalGame_Click;
+            this.Controls.Add(startLocalGame);
         }
     }
 }

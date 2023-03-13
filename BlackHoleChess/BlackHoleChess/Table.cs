@@ -10,46 +10,56 @@ namespace BlackHoleChess
     internal class Table
     {
         Form currentForm = Form.ActiveForm;
-        private int width;
-        private int height;
+        private int width = 9;
+        private int height = 13;
         private Piece[,] pieces;
-        private int left_space = 200;
-        private int under_space = 100;
-        private int test;
+        private int left_space;
+        private int under_space;
         public Table() {
-            this.height = 9;
-            this.width = 13;
-            pieces = new Piece[width, height];
+            pieces = new Piece[height, width];
             left_space = currentForm.Width / width;
+            under_space = currentForm.Height / height;
         }
 
-
-
-        public void createTable()
+        public void createTable(string playerSide)
         {
-            createBlackTeam();
-            //createWhiteTeam();
+            if(playerSide == "Black")
+            {
+
+                createEnemyTeam("White");
+                createUserTeam("Black");
+            }
+            else
+            {
+                createEnemyTeam("Black");
+                createUserTeam("White");
+            }
         }
 
-        private void createBlackTeam()
+        private void createEnemyTeam(string side)
         {
-           for (int line = 0; line < 13; ++line) {
-                for (int column = 0; column < height; ++column){
-                    pieces[line, column] = new Pawn(left_space * column, under_space * line, "Black");
+           for (int line = 1; line < 3; ++line) {
+                for (int column = 0; column < width; ++column){
+
+                    int xCoord = left_space * column;
+                    int yCoord = under_space * line;
+
+                    pieces[line, column] = new Pawn(xCoord, yCoord, side);
                 }
            }
         }
 
-        private void createWhiteTeam()
+        private void createUserTeam(string side)
         {
-            for (int line = 7; line < 9; ++line)
-            {
-                for (int column = 0; column < height; ++column)
-                {
-                    //pieces[line, height] = new Pawn(space * column, space * line, "Black");
+            for (int line = 10; line < 12; ++line){
+                for (int column = 0; column < width; ++column){
+
+                    int xCoord = left_space * column;
+                    int yCoord = under_space * line;
+
+                    pieces[line, column] = new Pawn(xCoord, yCoord, side);
                 }
             }
-
         }
 
     }
