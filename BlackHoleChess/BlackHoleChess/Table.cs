@@ -34,6 +34,7 @@ namespace BlackHoleChess
                 createEnemyTeam("Black");
                 createUserTeam("White");
             }
+            createSpaces();
         }
 
         private void createEnemyTeam(string side)
@@ -60,6 +61,28 @@ namespace BlackHoleChess
                     pieces[line, column] = new Pawn(xCoord, yCoord, side);
                 }
             }
+        }
+
+        private void createSpaces()
+        {
+            for (int column = 0; column < width; ++column)
+            {
+                pieces[0, column] = new Piece(left_space * column, 0, "");
+            }
+            
+            for (int column = 0; column < width; ++column)
+            {
+                pieces[0, column] = new Piece(left_space * column, 12 * under_space, "");
+            }
+
+            for(int column = 0;column < width; ++column)
+            {
+                for(int line = 3; line < 10; ++line) {
+
+                    pieces[0, column] = new Piece(left_space * column, under_space * line, "");
+                }
+            }
+
         }
 
     }

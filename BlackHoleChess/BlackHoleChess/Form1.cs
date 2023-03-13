@@ -23,7 +23,6 @@ namespace BlackHoleChess
         }
 
 
-        //Start Game Button
         private void startLocalGame_Click(object sender, EventArgs e)
         {
             if(entryPage.getDropBoxChoice() != String.Empty)
@@ -40,7 +39,6 @@ namespace BlackHoleChess
             
         }
 
-        //Set The start button details
         private void setLocalButton()
         {
             startLocalGame.Text = "Start Local Game";

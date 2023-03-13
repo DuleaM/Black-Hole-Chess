@@ -14,6 +14,7 @@ namespace BlackHoleChess
         protected int xCoord;
         protected int yCoord;
         protected Button button;
+        protected Size piecesSize = new Size(60, 90);
 
         protected string basePath = @"C:\Universtitate\An 3 sem 2\A.I\Proiect\BlackHoleChess";
 
@@ -23,6 +24,21 @@ namespace BlackHoleChess
             this.xCoord = xCoord;
             this.yCoord = yCoord;
             this.Side = side;
+
+            if (side == "")
+            {
+                button = new Button();
+                button.Location = new Point(xCoord, yCoord);
+                button.Size = piecesSize;
+                createInvisibleSpace();
+            }
+        }
+
+        private void createInvisibleSpace()
+        {
+            button.ForeColor = Color.Transparent;
+            button.FlatStyle = FlatStyle.Flat;
+            activeForm.Controls.Add(button);
         }
 
     }
