@@ -14,7 +14,7 @@ namespace BlackHoleChess
         private string side;
         protected int xCoord;
         protected int yCoord;
-        protected Button button;
+        public Button button;
         protected Size piecesSize = new Size(60, 90);
 
         protected string basePath = @"C:\Universtitate\An 3 sem 2\A.I\Proiect\BlackHoleChess";
@@ -34,49 +34,30 @@ namespace BlackHoleChess
             else if (side == "White")
                 image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_white.png");
             else if (side == "")
-            {
-                button.Location = new Point(xCoord, yCoord);
-                button.Size = piecesSize;
-                button.Click += space_Click;
-                createInvisibleSpace();
-            }
+                setWhiteSpace();
         }
 
         private void space_Click(object? sender, EventArgs e)
         {
 
         }
-
-        private void createInvisibleSpace()
+        protected bool arePressedPieces()
         {
-            clearBlock(button);
-            activeForm.Controls.Add(button);
-        }
-
-
-        protected void displayPossibleMoves()
-        {
-            if(this is Pawn)
+            for (int i = 0; i < Table.height; i++)
             {
-
-                if (this.button.BackColor == Color.Red)
+                for (int j = 0; j < Table.width; j++)
                 {
-                    clearPossibleMoveBlocks();
-                }
-                else
-                {
-                    int line = 0, column = 0;
-                    getIndexOfCurrentPiece(ref column, ref line);
-                    colorBlock(Table.pieces[line, column].button);
-                    colorBlock(Table.pieces[line - 1, column].button);
-                    
-                    if (Pawn.firstMove)
-                        colorBlock(Table.pieces[line - 2, column].button);
+                    if (Table.pieces[i, j].button.BackColor == Color.Red)
+                    {
+                        return true;
+                    }
                 }
             }
-
+            return false;
         }
-        private void getIndexOfCurrentPiece(ref int column, ref int line)
+
+
+        protected void getIndexOfCurrentPiece(ref int column, ref int line)
         {
             for (int i = 0; i < Table.height; i++)
             {
@@ -93,8 +74,7 @@ namespace BlackHoleChess
                 }
             }
         }
-
-        private void clearPossibleMoveBlocks()
+        protected void clearPossibleMoveBlocks()
         {
             for (int i = 0; i < Table.height; i++)
             {
@@ -107,19 +87,32 @@ namespace BlackHoleChess
                 }
             }
         }
-
-
-        private void colorBlock(Button button)
+        protected void colorBlock(Button button)
         {
             button.FlatStyle = FlatStyle.Standard;
             button.ForeColor = Color.Red;
             button.BackColor = Color.Red;
         }
-        private void clearBlock( Button button)
+        protected void clearBlock(Button button)
         {
             button.BackColor = Color.Transparent;
             button.ForeColor = Color.Transparent;
             button.FlatStyle = FlatStyle.Flat;
+        }
+        private void setWhiteSpace()
+        {
+            button.Location = new Point(xCoord, yCoord);
+            button.Size = piecesSize;
+            button.Click += space_Click;
+            clearBlock(button);
+            activeForm.Controls.Add(button);
+        }
+
+        protected bool pieceIsPressed(Button button)
+        {
+            if(button.BackColor == Color.Red)
+                return true;
+            return false;
         }
     }
 }
