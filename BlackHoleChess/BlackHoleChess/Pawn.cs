@@ -22,6 +22,7 @@ namespace BlackHoleChess
             button.Location = new Point(xCoord, yCoord);
             button.Size = piecesSize;
             button.Image = image;
+            button.Name = Side;
             button.Click += pawn_Click;
             activeForm.Controls.Add(button);
         }
@@ -30,16 +31,18 @@ namespace BlackHoleChess
         private void pawn_Click(object? sender, EventArgs e)
         {
             Button pressedPawn = sender as Button;
-            
-            if(pieceIsPressed(pressedPawn))
+
+            if (isYourTurn(pressedPawn))
             {
-                clearPossibleMoveBlocks();
+                if (pieceIsPressed(pressedPawn))
+                {
+                    clearPossibleMoveBlocks();
+                }
+                else if (!arePressedPieces())
+                {
+                    displayPossibleMoves();
+                }
             }
-            else if (!arePressedPieces())
-            {
-                displayPossibleMoves();
-            }
-            
         }
         
         private void displayPossibleMoves()

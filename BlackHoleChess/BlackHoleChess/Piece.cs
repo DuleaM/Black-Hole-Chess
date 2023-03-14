@@ -39,7 +39,13 @@ namespace BlackHoleChess
 
         private void space_Click(object? sender, EventArgs e)
         {
+            Button pressedSpace = sender as Button;
 
+            if (pressedSpace.BackColor == Color.Red && pressedSpace.Name == "")
+            {
+                setTurn();
+                clearPossibleMoveBlocks();
+            }
         }
         protected bool arePressedPieces()
         {
@@ -55,8 +61,12 @@ namespace BlackHoleChess
             }
             return false;
         }
-
-
+        protected bool pieceIsPressed(Button button)
+        {
+            if (button.BackColor == Color.Red)
+                return true;
+            return false;
+        }
         protected void getIndexOfCurrentPiece(ref int column, ref int line)
         {
             for (int i = 0; i < Table.height; i++)
@@ -108,11 +118,20 @@ namespace BlackHoleChess
             activeForm.Controls.Add(button);
         }
 
-        protected bool pieceIsPressed(Button button)
+        protected bool isYourTurn(Button piece)
         {
-            if(button.BackColor == Color.Red)
+            if (piece.Name == Table.turn)
                 return true;
             return false;
+                
         }
+        protected void setTurn()
+        {
+            if (Table.turn == "White")
+                Table.turn = "Black";
+            else if (Table.turn == "Black")
+                Table.turn = "White";
+        }
+
     }
 }

@@ -14,6 +14,7 @@ namespace BlackHoleChess
         public static Piece[,] pieces;
         public static int width = 9;
         public static int height = 13;
+        public static string turn = "White";
         private int left_space;
         private int under_space;
         public Table() {
@@ -26,7 +27,6 @@ namespace BlackHoleChess
         {
             if(playerSide == "Black")
             {
-
                 createEnemyTeam("White");
                 createUserTeam("Black");
             }
