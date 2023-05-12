@@ -30,7 +30,15 @@ namespace BlackHoleChess
 
         private void pawn_Click(object? sender, EventArgs e)
         {
-            Button pressedPawn = sender as Button;
+            Button pressedPawn = null;
+            try { 
+                pressedPawn = sender as Button;
+
+            }
+            catch{
+                MessageBox.Show("Aolo ceva nu e bine");
+            }
+
 
             if (isYourTurn(pressedPawn))
             {
@@ -40,12 +48,12 @@ namespace BlackHoleChess
                 }
                 else if (!arePressedPieces())
                 {
-                    displayPossibleMoves();
+                    displayMovesPlayer();
                 }
             }
         }
         
-        private void displayPossibleMoves()
+        private void displayMovesPlayer()
         {
             int line = 0, column = 0;
             getIndexOfCurrentPiece(ref column, ref line);
@@ -57,6 +65,10 @@ namespace BlackHoleChess
                 colorBlock(Table.pieces[line - 2, column].button);
         }
 
-        
+        private void displayMovesEnemy()
+        {
+
+        }
+
     }
 }

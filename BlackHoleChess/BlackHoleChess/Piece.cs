@@ -29,10 +29,13 @@ namespace BlackHoleChess
             this.yCoord = yCoord;
             this.side = side;
 
-            if (side == "Black")
-                image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_black.png");
-            else if (side == "White")
-                image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_white.png");
+            if (this is Pawn)
+            {
+                if (side == "Black")
+                    image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_black.png");
+                else if (side == "White")
+                    image = Image.FromFile(basePath + @"\BlackHoleChess\BlackHoleChess\PiecesPhotos\pawn_white.png");
+            }
             else if (side == "")
                 setWhiteSpace();
         }
