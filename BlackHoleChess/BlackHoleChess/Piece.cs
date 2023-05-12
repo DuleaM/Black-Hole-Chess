@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -70,7 +71,21 @@ namespace BlackHoleChess
                 return true;
             return false;
         }
-        protected void getIndexOfCurrentPiece(ref int column, ref int line)
+        protected Piece getPressedPiece()
+        {
+            for (int i = 0; i < Table.height; i++)
+            {
+                for (int j = 0; j < Table.width; j++)
+                {
+                    if (Table.pieces[i, j].side != "" && Table.pieces[i, j].button.BackColor == Color.Red)
+                    {
+                        return Table.pieces[i, j];
+                    }
+                }
+            }
+            return null;
+        }
+        protected void getIndexOfPressedPiece(ref int column, ref int line)
         {
             for (int i = 0; i < Table.height; i++)
             {
@@ -86,6 +101,14 @@ namespace BlackHoleChess
 
                 }
             }
+        }
+        protected void movePiece(Piece space, Piece piece)
+        {
+            //swap pieces
+            Piece temp = space;
+
+            space
+
         }
         protected void clearPossibleMoveBlocks()
         {

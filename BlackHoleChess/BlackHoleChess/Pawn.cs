@@ -9,11 +9,13 @@ namespace BlackHoleChess
 
     internal class Pawn : Piece
     {
-        private bool firstMove;
+        private static bool firstMoveWhite;
+        private static bool firstMoveBlack;
         public Pawn(int xCoord, int yCoord, string side) : base(xCoord, yCoord, side)
         {
             createPiece();
-            firstMove = true;
+            firstMoveWhite = true;
+            firstMoveBlack = true;
         }
 
         private void createPiece()
@@ -30,15 +32,7 @@ namespace BlackHoleChess
 
         private void pawn_Click(object? sender, EventArgs e)
         {
-            Button pressedPawn = null;
-            try { 
-                pressedPawn = sender as Button;
-
-            }
-            catch{
-                MessageBox.Show("Aolo ceva nu e bine");
-            }
-
+            Button pressedPawn = sender as Button;
 
             if (isYourTurn(pressedPawn))
             {
@@ -55,20 +49,50 @@ namespace BlackHoleChess
         
         private void displayMovesPlayer()
         {
+            if(this.Side == "White")
+            {
+                displayWhiteMoves();
+            }
+
+            if(this.Side == "Black")
+            {
+                displayBlackMoves();
+            }
+            
+        }
+
+        private void displayWhiteMoves()
+        {
             int line = 0, column = 0;
-            getIndexOfCurrentPiece(ref column, ref line);
+            getIndexOfPressedPiece(ref column, ref line);
 
             colorBlock(this.button);
-            colorBlock(Table.pieces[line - 1, column].button);
 
-            if (firstMove)
-                colorBlock(Table.pieces[line - 2, column].button);
+            if (Table.pieces[line - 1, column].Side == "") {
+                colorBlock(Table.pieces[line - 1, column].button);
+            }
+
+            if (firstMoveWhite){
+                if (Table.pieces[line - 2, column].Side == "")
+                {
+                    colorBlock(Table.pieces[line - 2, column].button);
+                }
+            }
         }
+           
 
-        private void displayMovesEnemy()
+        private void displayBlackMoves()
         {
+            int line = 0, column = 0;
+            getIndexOfPressedPiece(ref column, ref line);
 
+            colorBlock(this.button);
+            colorBlock(Table.pieces[line + 1, column].button);
+
+            if (firstMoveWhite)
+                colorBlock(Table.pieces[line + 2, column].button);
         }
+        
 
     }
 }
