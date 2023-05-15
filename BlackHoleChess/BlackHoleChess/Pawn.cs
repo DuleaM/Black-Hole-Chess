@@ -49,19 +49,16 @@ namespace BlackHoleChess
         
         private void displayMovesPlayer()
         {
-            if(this.Side == "White")
-            {
-                displayWhiteMoves();
+            if(Table.GameTurn == Table.PlayerSide) {
+                displayBottomPlayerMoves();
             }
-
-            if(this.Side == "Black")
+            else
             {
-                displayBlackMoves();
+                displayTopPlayerMoves();
             }
-            
         }
 
-        private void displayWhiteMoves()
+        private void displayBottomPlayerMoves()
         {
             int line = 0, column = 0;
             getIndexOfPressedPiece(ref column, ref line);
@@ -81,7 +78,7 @@ namespace BlackHoleChess
         }
            
 
-        private void displayBlackMoves()
+        private void displayTopPlayerMoves()
         {
             int line = 0, column = 0;
             getIndexOfPressedPiece(ref column, ref line);

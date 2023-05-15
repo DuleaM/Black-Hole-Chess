@@ -21,6 +21,10 @@ namespace BlackHoleChess
         protected string basePath = @"C:\Universtitate\An 3 sem 2\A.I\Proiect\BlackHoleChess";
 
         public string Side { get => side; set => side = value; }
+        public int XCoord { get => xCoord; set => xCoord = value; }
+        public int YCoord { get => yCoord; set => yCoord = value; }
+        public Image Image { get => image; set => image = value; }
+        public Button Button { get => button; set => button = value; }
 
         public Piece(int xCoord, int yCoord, string side) {
             button = new Button();
@@ -97,17 +101,23 @@ namespace BlackHoleChess
                         column = j;
                         break;
                     }
-                        
-
                 }
             }
         }
-        protected void movePiece(Piece space, Piece piece)
+        protected void movePiece(ref Piece space, ref Piece piece)
         {
             //swap pieces
-            Piece temp = space;
+            Piece space_temp = space;
 
-            space
+            space.Side = piece.side;
+            space.Button = piece.button;
+            space.XCoord = piece.xCoord;
+            space.YCoord = piece.yCoord;
+
+            piece.Side = space_temp.side;
+            piece.Button = space_temp.button;
+            piece.xCoord = space_temp.xCoord;
+            piece.YCoord = space_temp.yCoord;
 
         }
         protected void clearPossibleMoveBlocks()

@@ -30,7 +30,8 @@ namespace BlackHoleChess
                 entryPage.hideEntryPage();
                 this.Controls.Remove(startLocalGame);
 
-                table.createTable(entryPage.getDropBoxChoice());
+                Table.PlayerSide = entryPage.getDropBoxChoice();
+                table.createTable(Table.PlayerSide);
             }
             else
             {

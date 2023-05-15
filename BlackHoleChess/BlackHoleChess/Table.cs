@@ -17,6 +17,10 @@ namespace BlackHoleChess
         public static string turn = "White";
         private int left_space;
         private int under_space;
+        private static string playerSide;
+
+        public static string PlayerSide { get => playerSide; set => playerSide = value; }
+        public static string GameTurn { get => turn; set => turn = value; }
         public Table() {
             pieces = new Piece[height, width];
             left_space = currentForm.Width / width;
