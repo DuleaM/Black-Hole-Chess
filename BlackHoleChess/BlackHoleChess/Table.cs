@@ -50,7 +50,7 @@ namespace BlackHoleChess
                     int xCoord = left_space * column;
                     int yCoord = under_space * line;
 
-                    pieces[line, column] = new Pawn(xCoord, yCoord, side);
+                    pieces[line, column] = new Pawn(xCoord, yCoord, line, column, side);
                 }
            }
         }
@@ -63,7 +63,7 @@ namespace BlackHoleChess
                     int xCoord = left_space * column;
                     int yCoord = under_space * line;
 
-                    pieces[line, column] = new Pawn(xCoord, yCoord, side);
+                    pieces[line, column] = new Pawn(xCoord, yCoord, line, column, side);
                 }
             }
         }
@@ -72,12 +72,12 @@ namespace BlackHoleChess
         {
             for (int column = 0; column < width; ++column)
             {
-                pieces[0, column] = new Piece(left_space * column, 0, "");
+                pieces[0, column] = new Piece(left_space * column, 0, 0, column, "");
             }
             
             for (int column = 0; column < width; ++column)
             {
-                pieces[12, column] = new Piece(left_space * column, 12 * under_space, "");
+                pieces[12, column] = new Piece(left_space * column, 12 * under_space, 12, column, "");
             }
 
             for(int line = 3;line < 10; ++line)
@@ -87,7 +87,7 @@ namespace BlackHoleChess
                     int xCoord = left_space * column;
                     int yCoord = under_space * line;
 
-                    pieces[line, column] = new Piece(xCoord, yCoord, "");
+                    pieces[line, column] = new Piece(xCoord, yCoord, line, column, "");
                 }
             }
 

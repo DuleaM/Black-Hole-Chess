@@ -15,6 +15,8 @@ namespace BlackHoleChess
         private string side;
         protected int xCoord;
         protected int yCoord;
+        private int line;
+        private int column;
         public Button button;
         protected Size piecesSize = new Size(60, 90);
 
@@ -25,13 +27,17 @@ namespace BlackHoleChess
         public int YCoord { get => yCoord; set => yCoord = value; }
         public Image Image { get => image; set => image = value; }
         public Button Button { get => button; set => button = value; }
+        public int Line { get => line; set => line = value; }
+        public int Column { get => column; set => column = value; }
 
-        public Piece(int xCoord, int yCoord, string side) {
+        public Piece(int xCoord, int yCoord, int line, int column, string side) {
             button = new Button();
             button.BackColor = Color.Transparent;
 
             this.xCoord = xCoord;
             this.yCoord = yCoord;
+            this.line = line;
+            this.column = column;
             this.side = side;
 
             if (this is Pawn)
@@ -52,6 +58,7 @@ namespace BlackHoleChess
             if (pressedSpace.BackColor == Color.Red && pressedSpace.Name == "")
             {
                 setTurn();
+                //movePiece(ref pressedSpace, );
                 clearPossibleMoveBlocks();
             }
         }
@@ -89,21 +96,7 @@ namespace BlackHoleChess
             }
             return null;
         }
-        protected void getIndexOfPressedPiece(ref int column, ref int line)
-        {
-            for (int i = 0; i < Table.height; i++)
-            {
-                for (int j = 0; j < Table.width; j++)
-                {
-                    if (Table.pieces[i, j] == this)
-                    {
-                        line = i;
-                        column = j;
-                        break;
-                    }
-                }
-            }
-        }
+      
         protected void movePiece(ref Piece space, ref Piece piece)
         {
             //swap pieces
@@ -118,6 +111,8 @@ namespace BlackHoleChess
             piece.Button = space_temp.button;
             piece.xCoord = space_temp.xCoord;
             piece.YCoord = space_temp.yCoord;
+
+            
 
         }
         protected void clearPossibleMoveBlocks()

@@ -11,7 +11,7 @@ namespace BlackHoleChess
     {
         private static bool firstMoveWhite;
         private static bool firstMoveBlack;
-        public Pawn(int xCoord, int yCoord, string side) : base(xCoord, yCoord, side)
+        public Pawn(int xCoord, int yCoord, int line, int column, string side) : base(xCoord, yCoord, line, column, side)
         {
             createPiece();
             firstMoveWhite = true;
@@ -60,19 +60,16 @@ namespace BlackHoleChess
 
         private void displayBottomPlayerMoves()
         {
-            int line = 0, column = 0;
-            getIndexOfPressedPiece(ref column, ref line);
-
+          
             colorBlock(this.button);
-
-            if (Table.pieces[line - 1, column].Side == "") {
-                colorBlock(Table.pieces[line - 1, column].button);
+            if (Table.pieces[this.Line - 1, this.Column].Side == "") {
+                colorBlock(Table.pieces[this.Line - 1, this.Column].button);
             }
 
             if (firstMoveWhite){
-                if (Table.pieces[line - 2, column].Side == "")
+                if (Table.pieces[this.Line - 2, this.Column].Side == "")
                 {
-                    colorBlock(Table.pieces[line - 2, column].button);
+                    colorBlock(Table.pieces[this.Line - 2, this.Column].button);
                 }
             }
         }
@@ -80,14 +77,12 @@ namespace BlackHoleChess
 
         private void displayTopPlayerMoves()
         {
-            int line = 0, column = 0;
-            getIndexOfPressedPiece(ref column, ref line);
-
+            
             colorBlock(this.button);
-            colorBlock(Table.pieces[line + 1, column].button);
+            colorBlock(Table.pieces[this.Line + 1, this.Column].button);
 
             if (firstMoveWhite)
-                colorBlock(Table.pieces[line + 2, column].button);
+                colorBlock(Table.pieces[this.Line + 2, this.Column].button);
         }
         
 
