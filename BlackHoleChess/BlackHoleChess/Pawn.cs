@@ -21,7 +21,7 @@ namespace BlackHoleChess
         private void createPiece()
         {
             button = new Button();
-            button.Location = new Point(xCoord, yCoord);
+            button.Location = new Point(XCoord, YCoord);
             button.Size = piecesSize;
             button.Image = image;
             button.Name = Side;

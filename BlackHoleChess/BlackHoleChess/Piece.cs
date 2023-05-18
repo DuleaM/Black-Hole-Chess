@@ -13,8 +13,8 @@ namespace BlackHoleChess
         protected Form activeForm = Form.ActiveForm;
         protected Image image;
         private string side;
-        protected int xCoord;
-        protected int yCoord;
+        private int xCoord;
+        private int yCoord;
         private int line;
         private int column;
         public Button button;
@@ -53,12 +53,12 @@ namespace BlackHoleChess
 
         private void space_Click(object? sender, EventArgs e)
         {
-            Button pressedSpace = sender as Button;
+            Button pressedSpaceButton = sender as Button;
 
-            if (pressedSpace.BackColor == Color.Red && pressedSpace.Name == "")
+            if (pressedSpaceButton.BackColor == Color.Red && pressedSpaceButton.Name == "")
             {
+                movePiece(getPressedSpace(pressedSpaceButton), getPressedPiece());
                 setTurn();
-                //movePiece(ref pressedSpace, );
                 clearPossibleMoveBlocks();
             }
         }
@@ -96,24 +96,39 @@ namespace BlackHoleChess
             }
             return null;
         }
-      
-        protected void movePiece(ref Piece space, ref Piece piece)
+
+        protected Piece getPressedSpace(Button button)
+        {
+            for (int i = 0; i < Table.height; i++)
+            {
+                for (int j = 0; j < Table.width; j++)
+                {
+                    if (ReferenceEquals(Table.pieces[i, j].Button, button))
+                    {
+                        return Table.pieces[i, j];
+                    }
+                }
+            }
+            return null;
+        }
+        protected void movePiece(Piece space, Piece piece)
         {
             //swap pieces
-            Piece space_temp = space;
-
-            space.Side = piece.side;
-            space.Button = piece.button;
-            space.XCoord = piece.xCoord;
-            space.YCoord = piece.yCoord;
-
-            piece.Side = space_temp.side;
-            piece.Button = space_temp.button;
-            piece.xCoord = space_temp.xCoord;
-            piece.YCoord = space_temp.yCoord;
-
+            int line = space.Line;
+            int column = space.Column;
+            Button button = new Button();
+            button.Location = space.button.Location;
             
+            space.Column = piece.Column;
+            space.Line = piece.Line;
+            space.button.Location = piece.button.Location;
+            
+            piece.Column = column;
+            piece.Line = line;
+            piece.button.Location = button.Location;
 
+            Table.pieces[space.Line, space.Column] = space;
+            Table.pieces[piece.Line, piece.Column] = piece;
         }
         protected void clearPossibleMoveBlocks()
         {
@@ -163,6 +178,5 @@ namespace BlackHoleChess
             else if (Table.turn == "Black")
                 Table.turn = "White";
         }
-
     }
 }
